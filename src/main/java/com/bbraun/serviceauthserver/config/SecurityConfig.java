@@ -9,6 +9,7 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -99,7 +100,7 @@ public class SecurityConfig {
 
     @Bean
     @Order(2)
-    public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain webSecurityFilterChain(HttpSecurity http, @Value("${frontend.url}") String frontendurl) throws Exception {
         http.cors(Customizer.withDefaults());
         //http.cors((cors) -> cors.configurationSource(corsConfigurationSource));
         http
@@ -115,7 +116,7 @@ public class SecurityConfig {
         http.logout(logout -> {
             logout
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout","POST"))
-                    .logoutSuccessUrl("http://localhost:4200/main");
+                    .logoutSuccessUrl(frontendurl+"/main");
                     //.logoutSuccessHandler(new CustomLogoutSuccessHandler());
         });
 
@@ -163,8 +164,8 @@ public class SecurityConfig {
 
 
     @Bean
-    public AuthorizationServerSettings authorizationServerSettings(){
-        return AuthorizationServerSettings.builder().issuer("http://localhost:8100").build();
+    public AuthorizationServerSettings authorizationServerSettings(@Value("${issuer.url}") String issuerurl) {
+        return AuthorizationServerSettings.builder().issuer(issuerurl).build();
     }
 
     @Bean
