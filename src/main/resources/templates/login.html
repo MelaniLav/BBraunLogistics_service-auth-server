@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Iniciar Sesion</title>
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.min.css"
+            rel="stylesheet"
+    />
+
+    <style>
+        .titulo-log {
+            color: #036247;
+            font-family: times new roman ,serif;
+        }
+        .iniciar {
+            color: #108554;
+        }
+        .color-boton{
+            background-color: #00A974;
+        }
+    </style>
+
+    <style>
+        .fondo-p{
+            background: rgb(34,193,195);
+            background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(18,105,69,1) 100%);
+        }
+    </style>
+
+</head>
+<body>
+<section class="vh-100 fondo-p">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Praha_Chodov_V_Parku_16_B_Braun.jpg"
+                                 alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
+
+                                <form method="post" th:action="@{/login}">
+
+                                    <div class="d-flex align-items-center mb-3 pb-1 titulo-log">
+                                        <i class="fas fa-cubes fa-2x me-3" style="color: #036247;"></i>
+                                        <span class="h1 fw-bold mb-0">B.Braun</span>
+                                    </div>
+
+                                    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                                        Credenciales erróneas
+                                    </div>
+                                    <div th:if="${param.logout}" class="alert alert-success" role="alert">
+                                        Has cerrado sesión.
+                                    </div>
+
+                                    <h5 class="fw-normal mb-3 pb-3 iniciar" style="letter-spacing: 1px;">Iniciar sesion</h5>
+
+
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <input type="text" placeholder="Username" id="username" name="username" class="form-control form-control-lg" required autofocus/>
+                                        <label class="form-label" for="username">Correo electronico</label>
+                                    </div>
+
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Password" required/>
+                                        <label class="form-label" for="password">Password</label>
+                                    </div>
+
+                                    <div class="pt-1 mb-4">
+                                        <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.2/mdb.umd.min.js"
+></script>
+</body>
+</html>
